@@ -1,0 +1,84 @@
+/* General hero section styling */
+.hero {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background: #0a0f3f;
+  color: #fff;
+  text-align: center;
+  padding: 20px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.hero-content {
+  max-width: 700px;
+}
+
+/* Name & title */
+.hero-name {
+  font-size: 3rem;
+  color: #5a7fff;
+  margin-bottom: 10px;
+}
+
+.hero-title {
+  font-size: 1.3rem;
+  color: #b0b0b0;
+  margin-bottom: 20px;
+}
+
+.hero-description {
+  font-size: 1rem;
+  line-height: 1.6;
+  margin-bottom: 30px;
+  color: #d0d0d0;
+}
+
+/* Buttons */
+.hero-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  margin-bottom: 30px;
+}
+
+.btn {
+  padding: 12px 25px;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.btn-primary {
+  background: #5a7fff;
+  color: #fff;
+}
+
+.btn-primary:hover {
+  background: #3f5fd1;
+}
+
+.btn-secondary {
+  background: #111;
+  color: #fff;
+  border: 1px solid #5a7fff;
+}
+
+.btn-secondary:hover {
+  background: #5a7fff;
+  color: #fff;
+}
+
+/* Social icons */
+.hero-socials a {
+  margin: 0 10px;
+  color: #d0d0d0;
+  font-size: 1.5rem;
+  transition: color 0.3s;
+}
+
+.hero-socials a:hover {
+  color: #5a7fff;
+}
