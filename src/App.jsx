@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "./App.css";
 import resume from "./assets/Dhanush S Resume.pdf";
-import ProfilePic from "./assets/ProfilePic.png";
+import ProfilePic from "./assets/Dhanush.jpg";
 import mongoCertificate from "./assets/mongodb.pdf";
 import oracleCertificate from "./assets/OracleCertificate.pdf";
 
@@ -160,35 +160,32 @@ export default function App() {
     setFormStatus("sending");
 
     try {
-      // Using FormSubmit to forward messages directly to inbox
-      const payload = new FormData();
-      payload.append("name", formData.name);
-      payload.append("email", formData.email);
-      payload.append("message", formData.message);
-      payload.append("_replyto", formData.email);
-      payload.append("_subject", "New portfolio enquiry");
-      payload.append("_captcha", "false");
-
-      const response = await fetch("https://formsubmit.co/ajax/sdhanush1009@gmail.com", {
-        method: "POST",
+      const response = await fetch('http://localhost:5000/api/contact', {
+        method: 'POST',
         headers: {
-          Accept: "application/json",
+          'Content-Type': 'application/json',
         },
-        body: payload,
+        body: JSON.stringify({
+          name: formData.name,
+          email: formData.email,
+          message: formData.message
+        })
       });
 
-      if (response.ok) {
+      const data = await response.json();
+
+      if (response.ok && data.success) {
         setFormStatus("success");
         setFormData({ name: "", email: "", message: "" });
-        setTimeout(() => setFormStatus(""), 3000);
+        setTimeout(() => setFormStatus(""), 5000);
       } else {
         setFormStatus("error");
-        setTimeout(() => setFormStatus(""), 3000);
+        setTimeout(() => setFormStatus(""), 5000);
       }
     } catch (error) {
-      console.error("Form submission error:", error);
+      console.error('Error sending message:', error);
       setFormStatus("error");
-      setTimeout(() => setFormStatus(""), 3000);
+      setTimeout(() => setFormStatus(""), 5000);
     }
   };
 
@@ -346,6 +343,24 @@ export default function App() {
 
       <div className="container">
         {/* Quick Stats Section
+        <section className="stats">
+          <div className="stat-card">
+            <div className="stat-number">3</div>
+            <div className="stat-label">Projects Completed</div>
+          </div>
+          {/* <div className="stat-card">
+            <div className="stat-number">30+</div>
+            <div className="stat-label">Happy Clients</div>
+          </div>
+          <div className="stat-card">
+            <div className="stat-number">3+</div>
+            <div className="stat-label">Years Experience</div>
+          </div>
+          <div className="stat-card">
+            <div className="stat-number">100%</div>
+            <div className="stat-label">Satisfaction Rate</div>
+          </div>
+        // </section> */} 
         
 
         {/* Skills Section */}
@@ -402,7 +417,7 @@ export default function App() {
               <div className="event-details">
                 <h3>Hackathon</h3>
                 <br></br>
-                <p>Participating in the HACKGENIX event organized in the TECHNO SUMMIT’25,held on 12th & 13th September, 2025.</p>
+                <p>Participating in the HACKGENIX event organized in the TECHNO SUMMIT'25,held on 12th & 13th September, 2025.</p>
               </div>
             </div>
             
@@ -411,7 +426,7 @@ export default function App() {
               <div className="event-details">
                 <h3>Hackathon</h3>
                 <br></br>
-                <p>Participated in “AlgoArena’ 25”, a 24 hours hackathon held on 17th & 18th September, 2025.</p>
+                <p>Participated in "AlgoArena' 25", a 24 hours hackathon held on 17th & 18th September, 2025.</p>
               </div>
             </div>
             
