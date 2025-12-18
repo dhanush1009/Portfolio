@@ -4,6 +4,7 @@ import resume from "./assets/Dhanush S Resume.pdf";
 import ProfilePic from "./assets/Dhanush.jpg";
 import mongoCertificate from "./assets/mongodb.pdf";
 import oracleCertificate from "./assets/OracleCertificate.pdf";
+import emailjs from '@emailjs/browser';
 
 export default function App() {
   const [isDarkMode, setIsDarkMode] = useState(false);
@@ -160,28 +161,23 @@ export default function App() {
     setFormStatus("sending");
 
     try {
-      const response = await fetch('http://localhost:5000/api/contact', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
+      // Send email using EmailJS
+      await emailjs.send(
+        import.meta.env.VITE_EMAILJS_SERVICE_ID,
+        import.meta.env.VITE_EMAILJS_TEMPLATE_ID,
+        {
+          from_name: formData.name,
+          from_email: formData.email,
+          reply_to: formData.email, // This allows you to click "Reply" in your email
+          message: formData.message,
+          to_name: "Dhanush", // Your name
         },
-        body: JSON.stringify({
-          name: formData.name,
-          email: formData.email,
-          message: formData.message
-        })
-      });
+        import.meta.env.VITE_EMAILJS_PUBLIC_KEY
+      );
 
-      const data = await response.json();
-
-      if (response.ok && data.success) {
-        setFormStatus("success");
-        setFormData({ name: "", email: "", message: "" });
-        setTimeout(() => setFormStatus(""), 5000);
-      } else {
-        setFormStatus("error");
-        setTimeout(() => setFormStatus(""), 5000);
-      }
+      setFormStatus("success");
+      setFormData({ name: "", email: "", message: "" });
+      setTimeout(() => setFormStatus(""), 5000);
     } catch (error) {
       console.error('Error sending message:', error);
       setFormStatus("error");
