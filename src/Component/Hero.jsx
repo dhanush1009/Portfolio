@@ -1,33 +1,66 @@
-// import React from "react";
-// import "./Hero.css"; // CSS file with all animations and styling
+import React from "react";
+import resume from "../assets/Dhanush S Resume.pdf";
+import ProfilePic from "../assets/Dhanush.jpg";
 
-// const Hero = () => {
-//   return (
-//     <section className="hero">
-//       <div className="hero-content">
-//         <h1 className="hero-name">Dhanush</h1>
-//         <p className="hero-title">Web Developer & Creative Problem Solver</p>
-//         <p className="hero-description">
-//           Hi! I'm a passionate web developer with a knack for creating interactive 
-//           and user-friendly web applications. I specialize in modern web 
-//           technologies and love turning ideas into real, functional projects.
-//         </p>
-//         <div className="hero-buttons">
-//           <a href="mailto:yourmail@example.com" className="btn btn-primary">
-//             Get In Touch
-//           </a>
-//           <a href="/resume.pdf" className="btn btn-secondary">
-//             Download Resume
-//           </a>
-//         </div>
-//         <div className="hero-socials">
-//           <a href="#"><i className="fab fa-github"></i></a>
-//           <a href="#"><i className="fab fa-linkedin"></i></a>
-//           <a href="mailto:yourmail@example.com"><i className="fas fa-envelope"></i></a>
-//         </div>
-//       </div>
-//     </section>
-//   );
-// };
-
-// export default Hero;
+export default function Hero() {
+  return (
+    <section className="hero" id="home">
+      <div className="hero-wrapper">
+        <div className="hero-content">
+          <span className="hero-kicker">UI/UX Designer</span>
+          <h1 className="hero-name">
+            Dhanush
+            <span className="hero-glow"> Builds immersive web stories</span>
+          </h1>
+          <p className="hero-desc">
+            Crafts intuitive and engaging digital experiences. A collaborative UI/UX designer passionate about blending user-centered design with modern technologies to deliver products that delight users.
+          </p>
+          <div className="hero-actions">
+            <button
+              className="btn btn-primary"
+              onClick={() => {
+                const link = document.createElement('a');
+                link.href = resume;
+                link.download = 'Dhanush_Resume.pdf';
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+              }}
+            >
+              Download Resume
+            </button>
+            <div className="hero-actions__meta">
+              <span className="meta-pill">Frontend · Backend · UI/UX</span>
+            </div>
+          <div className="social-icons">
+            <a href="https://github.com/dhanush1009" target="_blank" rel="noreferrer" className="social-link" title="GitHub"><i className="fab fa-github"></i></a>
+            <a href="https://www.linkedin.com/in/dhanush-s-679674337/" target="_blank" rel="noreferrer" className="social-link" title="LinkedIn"><i className="fab fa-linkedin"></i></a>
+          </div>
+          </div>
+        </div>
+        <div className="hero-visual">
+          <div className="profile-frame">
+            <div className="profile-halo"></div>
+            <div className="profile-tilt">
+              <span className="profile-glare"></span>
+              <img src={ProfilePic} alt="Dhanush" className="profile-image" />
+            </div>
+            <div className="profile-tag"></div>
+          </div>
+          <div className="hero-planet">
+            <div className="hero-cube">
+              <span className="cube-face cube-face--front">React</span>
+              <span className="cube-face cube-face--back">Node</span>
+              <span className="cube-face cube-face--left">UI/UX</span>
+              <span className="cube-face cube-face--right">APIs</span>
+              <span className="cube-face cube-face--top">JS</span>
+              <span className="cube-face cube-face--bottom">SQL</span>
+            </div>
+            <div className="hero-orbit hero-orbit--outer"></div>
+            <div className="hero-orbit hero-orbit--inner"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
