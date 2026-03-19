@@ -76,8 +76,8 @@ export default function App() {
 
       <div className="container">
         <Skills />
-        <Events />
         <Experience />
+        <Events />
         <Projects />
         <Certificates />
         <Contact />
