@@ -24,6 +24,12 @@ const projects = [
     title: "KEC Student Portal",
     description: "Student portal UI in Figma with fees, results, LinkedIn integration, and a community to connect juniors and seniors.",
     tech: ["UI/UX","Figma"],
+  },
+  {
+    id: 5,
+    title: "Go Naturo",
+    description: "Go Naturo is a project focused on building a clean and user-friendly platform that highlights natural products with smooth browsing and a simple experience.",
+    tech: ["React", "JavaScript", "CSS", "UI/UX"],
   }
 ];
 
