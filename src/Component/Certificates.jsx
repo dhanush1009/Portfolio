@@ -1,7 +1,6 @@
 import React from "react";
 import mongoCertificate from "../assets/mongodb.pdf";
 import oracleCertificate from "../assets/OracleCertificate.pdf";
-import internCertificate from "../assets/intern.pdf";
 
 export default function Certificates() {
   return (
@@ -35,16 +34,6 @@ export default function Certificates() {
           </div>
           <p className="certificate-desc">Global Certificate proves that a person has basic knowledge of Java programming and core concepts used in software development.</p>
           <a href="#" className="certificate-link">View Certificate <i className="fas fa-external-link-alt"></i></a>
-        </div>
-        <div className="certificate-card">
-          <div className="certificate-header">
-            <i className="fas fa-certificate"></i>
-            <h3>Intern</h3>
-          </div>
-          <p className="certificate-desc">Internship certificate that highlights practical project experience and real-world industry exposure.</p>
-          <a href={internCertificate} target="_blank" rel="noreferrer" className="certificate-link">
-            View Certificate <i className="fas fa-external-link-alt"></i>
-          </a>
         </div>
       </div>
     </section>

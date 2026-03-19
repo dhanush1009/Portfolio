@@ -30,6 +30,12 @@ const projects = [
     title: "Go Naturo",
     description: "Go Naturo is a project focused on building a clean and user-friendly platform that highlights natural products with smooth browsing and a simple experience.",
     tech: ["React", "JavaScript", "CSS", "UI/UX"],
+  },
+  {
+    id: 6,
+    title: "Shanruck Technologies",
+    description: "Developed a business-oriented web solution with a focus on responsive UI, clean component architecture, and smooth user interaction.",
+    tech: ["React", "JavaScript", "CSS", "Node.js"],
   }
 ];
 

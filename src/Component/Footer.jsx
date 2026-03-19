@@ -14,6 +14,7 @@ export default function Footer({ scrollToSection }) {
             <li><a href="#projects" onClick={(e) => { e.preventDefault(); scrollToSection("projects"); }}>Projects</a></li>
             <li><a href="#skills" onClick={(e) => { e.preventDefault(); scrollToSection("skills"); }}>Skills</a></li>
             <li><a href="#events" onClick={(e) => { e.preventDefault(); scrollToSection("events"); }}>Events</a></li>
+            <li><a href="#experience" onClick={(e) => { e.preventDefault(); scrollToSection("experience"); }}>Experience</a></li>
             <li><a href="#contact" onClick={(e) => { e.preventDefault(); scrollToSection("contact"); }}>Contact</a></li>
           </ul>
         </div>

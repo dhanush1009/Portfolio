@@ -5,6 +5,7 @@ import Navbar from "./Component/Navbar";
 import Hero from "./Component/Hero";
 import Skills from "./Component/Skills";
 import Events from "./Component/Events";
+import Experience from "./Component/Experience";
 import Projects from "./Component/Projects";
 import Certificates from "./Component/Certificates";
 import Contact from "./Component/Contact";
@@ -76,6 +77,7 @@ export default function App() {
       <div className="container">
         <Skills />
         <Events />
+        <Experience />
         <Projects />
         <Certificates />
         <Contact />
