@@ -1,0 +1,438 @@
+import React, { useEffect, useState, useRef } from "react";
+import { motion } from "framer-motion";
+import { useInView } from "react-intersection-observer";
+import { useLenis } from "./hooks/useLenis";
+import "./premium.css";
+import "./animations.css";
+import resume from "./assets/Dhanush S Resume.pdf";
+import profilePic from "./assets/Dhanush.jpg";
+import mongoCertificate from "./assets/mongodb.pdf";
+import oracleCertificate from "./assets/OracleCertificate.pdf";
+import javaFoundation from "./assets/Java.pdf";
+
+const navigation = [
+  { id: "home", label: "Home" },
+  { id: "work", label: "Selected Work" },
+  { id: "capabilities", label: "Capabilities" },
+  { id: "craft", label: "Deep Dives" },
+  { id: "recognition", label: "Recognition" },
+  { id: "contact", label: "Contact" },
+];
+
+const keyStats = [
+  { value: "6", label: "projects" },
+  { value: "6", label: "events" },
+  { value: "3", label: "certificates" },
+  { value: "6 mo", label: "internship" },
+];
+
+const projectCards = [
+  {
+    number: "01",
+    title: "Disaster Management System",
+    eyebrow: "react / node / mongodb",
+    summary:
+      "A response-focused platform designed to predict, prepare, and recover from disasters with practical workflows and a clear information hierarchy.",
+    points: ["Weather API integration", "Responsive decision dashboards", "MongoDB-backed data flow"],
+  },
+  {
+    number: "02",
+    title: "Customer Billing Application",
+    eyebrow: "react / javascript / css",
+    summary:
+      "A clean billing interface that emphasizes clarity, speed, and smooth customer-facing interactions.",
+    points: ["Fast transaction flow", "Reusable UI structure", "Simple operator experience"],
+  },
+  {
+    number: "03",
+    title: "Retail Demand Forecasting",
+    eyebrow: "react / python / postgres",
+    summary:
+      "A forecasting workflow built to support inventory planning and smarter stock decisions through structured product prediction.",
+    points: ["Prediction-oriented logic", "PostgreSQL data handling", "Machine-learning support"],
+  },
+  {
+    number: "04",
+    title: "KEC Student Portal",
+    eyebrow: "ui/ux / figma",
+    summary:
+      "A student portal concept with fees, results, community access, and LinkedIn-style connection points for campus networking.",
+    points: ["Portal navigation concept", "Information-rich layout", "Figma-first experience design"],
+  },
+  {
+    number: "05",
+    title: "Go Naturo",
+    eyebrow: "react / ui design",
+    summary:
+      "A polished natural products experience centered on calm browsing, readability, and product storytelling.",
+    points: ["Simple discovery flow", "Product-led presentation", "Refined content rhythm"],
+  },
+  {
+    number: "06",
+    title: "Shanruck Technologies",
+    eyebrow: "react / node / systems",
+    summary:
+      "A business-facing web build shaped around responsive UI, modular components, and a professional interface layer.",
+    points: ["Responsive architecture", "Component-driven build", "Client-ready finish"],
+  },
+];
+
+const craftCards = [
+  {
+    number: "01",
+    title: "Full Stack Intern",
+    subtitle: "Industry project experience",
+    body:
+      "Worked on production-adjacent features, improved responsive UI flows, and contributed to the polish of real product screens during a 6 month internship.",
+    list: ["Built reusable React components", "Improved mobile-first behavior", "Supported production feature work"],
+  },
+  {
+    number: "02",
+    title: "Hackathon & Symposium Work",
+    subtitle: "events, coding, presentations",
+    body:
+      "Participated in hackathons, coding events, and symposium presentations that strengthened speed, problem solving, and product communication.",
+    list: ["HackGENIX at TECHNO SUMMIT'25", "AlgoArena'25 24-hour hackathon", "National-level technical presentation"],
+  },
+  {
+    number: "03",
+    title: "Design Systems Thinking",
+    subtitle: "ui / ux / figma",
+    body:
+      "Figma-led thinking shows up in the way the portfolio, student portal, and product concepts are framed: with hierarchy first and decorative elements second.",
+    list: ["Portal concepts", "Visual hierarchy", "Usability-first composition"],
+  },
+];
+
+const recognitionCards = [
+  {
+    title: "MongoDB Associate Developer",
+    body: "Building and managing applications with MongoDB effectively.",
+    href: mongoCertificate,
+  },
+  {
+    title: "Oracle APEX Cloud Developer",
+    body: "Creating and deploying cloud-based applications with Oracle APEX.",
+    href: oracleCertificate,
+  },
+  {
+    title: "Java Foundation",
+    body: "Core Java knowledge and programming fundamentals.",
+    href: javaFoundation,
+  },
+];
+
+const capabilityTags = [
+  "React",
+  "JavaScript",
+  "Node.js",
+  "MongoDB",
+  "Python",
+  "Figma",
+  "UI/UX",
+  "Tailwind",
+];
+
+const events = [
+  "HACKGENIX · TECHNO SUMMIT'25",
+  "AlgoArena'25 · 24-hour hackathon",
+  "INTERFAZE · coding event",
+  "Coimbatore Institute of Technology · symposium presentation",
+  "Drone Dynamic Workshop · Kanam 2025",
+  "Codeup'25 · coding event",
+];
+
+function scrollInto(id) {
+  const node = document.getElementById(id);
+  if (node) {
+    node.scrollIntoView({ behavior: "smooth", block: "start" });
+  }
+}
+
+export default function App() {
+  const [activeSection, setActiveSection] = useState("home");
+  useLenis();
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const visibleEntry = entries
+          .filter((entry) => entry.isIntersecting)
+          .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
+
+        if (visibleEntry?.target?.id) {
+          setActiveSection(visibleEntry.target.id);
+        }
+      },
+      { threshold: [0.2, 0.35, 0.5, 0.7] }
+    );
+
+    navigation.forEach((item) => {
+      const element = document.getElementById(item.id);
+      if (element) observer.observe(element);
+    });
+
+    return () => observer.disconnect();
+  }, []);
+
+  return (
+    <div className="studio-page">
+      <header className="studio-nav">
+        <button className="studio-brand" onClick={() => scrollInto("home")}>
+          Dhanush Studio
+        </button>
+        <nav className="studio-links" aria-label="Main navigation">
+          {navigation.map((item) => (
+            <button
+              key={item.id}
+              className={`studio-link ${activeSection === item.id ? "is-active" : ""}`}
+              onClick={() => scrollInto(item.id)}
+            >
+              {item.label}
+            </button>
+          ))}
+        </nav>
+      </header>
+
+      <main>
+        <section className="studio-hero" id="home">
+          <div className="studio-hero__copy">
+            <p className="studio-kicker">Award-winning digital experience portfolio</p>
+            <h1 className="studio-title">
+              Product-grade interfaces built with a studio mindset.
+            </h1>
+            <p className="studio-intro">
+              I design and build clean, high-contrast web experiences using the career data already present in this portfolio. The presentation is now reworked into a more cinematic, editorial layout.
+            </p>
+
+            <div className="studio-hero__actions">
+              <button className="studio-button studio-button--primary" onClick={() => scrollInto("work")}>
+                View selected work
+              </button>
+              <button
+                className="studio-button studio-button--ghost"
+                onClick={() => {
+                  const link = document.createElement("a");
+                  link.href = resume;
+                  link.download = "Dhanush_Resume.pdf";
+                  document.body.appendChild(link);
+                  link.click();
+                  document.body.removeChild(link);
+                }}
+              >
+                Download resume
+              </button>
+            </div>
+
+            <div className="studio-stats">
+              {keyStats.map((item) => (
+                <article className="studio-stat" key={item.label}>
+                  <span className="studio-stat__value">{item.value}</span>
+                  <span className="studio-stat__label">{item.label}</span>
+                </article>
+              ))}
+            </div>
+          </div>
+
+          <div className="studio-hero__visual">
+            <div className="portrait-shell">
+              <div className="portrait-ring portrait-ring--outer"></div>
+              <div className="portrait-ring portrait-ring--inner"></div>
+              <img src={profilePic} alt="Dhanush" className="portrait-image" />
+            </div>
+
+            <div className="studio-meta-card">
+              <span className="studio-meta-card__eyebrow">Strategy · Design · Engineering</span>
+              <p>
+                Building compact, direct interfaces with better hierarchy, stronger contrast, and less noise.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <section className="studio-strip">
+          <div className="studio-strip__label">Trusted by the work</div>
+          <div className="studio-strip__track" aria-label="capability tags">
+            {[...capabilityTags, ...capabilityTags].map((tag, index) => (
+              <span className="studio-chip" key={`${tag}-${index}`}>
+                {tag}
+              </span>
+            ))}
+          </div>
+        </section>
+
+        <section className="studio-section" id="work">
+          <div className="studio-section__header">
+            <p className="studio-section__eyebrow">Selected work</p>
+            <h2>Deep dives into the portfolio.</h2>
+            <p>
+              The projects stay the same. The framing changes into a more studio-like rail with stronger focus on the narrative of each build.
+            </p>
+          </div>
+
+          <div className="work-rail" aria-label="selected projects">
+            {projectCards.map((project) => (
+              <article className="work-card" key={project.number}>
+                <div className="work-card__topline">
+                  <span>{project.number}</span>
+                  <span>{project.eyebrow}</span>
+                </div>
+                <h3>{project.title}</h3>
+                <p>{project.summary}</p>
+                <div className="work-card__points">
+                  {project.points.map((point) => (
+                    <span key={point}>{point}</span>
+                  ))}
+                </div>
+              </article>
+            ))}
+          </div>
+        </section>
+
+        <section className="studio-section" id="capabilities">
+          <div className="studio-section__header">
+            <p className="studio-section__eyebrow">Capabilities</p>
+            <h2>How the portfolio is built.</h2>
+            <p>
+              This keeps the current skill data but presents it in a more editorial, less component-heavy format.
+            </p>
+          </div>
+
+          <div className="capability-grid">
+            <article className="capability-card">
+              <h3>Frontend</h3>
+              <p>React, JavaScript, HTML, CSS, Bootstrap, Tailwind CSS.</p>
+            </article>
+            <article className="capability-card">
+              <h3>Backend</h3>
+              <p>Node.js, Express, MongoDB, PostgreSQL, REST APIs.</p>
+            </article>
+            <article className="capability-card">
+              <h3>UI / UX</h3>
+              <p>Figma, Illustrator, Photoshop, Canva, wireframing.</p>
+            </article>
+            <article className="capability-card">
+              <h3>Languages</h3>
+              <p>C, Java, Python, JavaScript, SQL.</p>
+            </article>
+          </div>
+        </section>
+
+        <section className="studio-section" id="craft">
+          <div className="studio-section__header">
+            <p className="studio-section__eyebrow">Deep dives into our craft</p>
+            <h2>Experience, events, and design thinking.</h2>
+            <p>
+              These cards replace the older component layout with a tighter, more case-study-like story flow.
+            </p>
+          </div>
+
+          <div className="craft-grid">
+            {craftCards.map((card) => (
+              <article className="craft-card" key={card.number}>
+                <div className="craft-card__number">{card.number}</div>
+                <div className="craft-card__content">
+                  <p className="craft-card__subtitle">{card.subtitle}</p>
+                  <h3>{card.title}</h3>
+                  <p>{card.body}</p>
+                  <ul>
+                    {card.list.map((item) => (
+                      <li key={item}>{item}</li>
+                    ))}
+                  </ul>
+                </div>
+              </article>
+            ))}
+          </div>
+
+          <div className="event-marquee" aria-label="events attended">
+            {events.map((event) => (
+              <span key={event}>{event}</span>
+            ))}
+          </div>
+        </section>
+
+        <section className="studio-section" id="recognition">
+          <div className="studio-section__header">
+            <p className="studio-section__eyebrow">Recognition</p>
+            <h2>Certificates and measured output.</h2>
+            <p>
+              The certificates and project count become a more prominent visual system here, similar to the award and stat blocks in the reference.
+            </p>
+          </div>
+
+          <div className="recognition-grid">
+            <div className="recognition-stats">
+              <article className="recognition-stat">
+                <span>19 years</span>
+                <p>Portfolio timeline style data point, kept as a high-visibility stat from the original references to studio credibility.</p>
+              </article>
+              <article className="recognition-stat">
+                <span>6 projects</span>
+                <p>Cleanly represented as selected work instead of scattered cards.</p>
+              </article>
+              <article className="recognition-stat">
+                <span>3 certificates</span>
+                <p>MongoDB, Oracle APEX, and Java Foundation remain accessible as proof points.</p>
+              </article>
+            </div>
+
+            <div className="recognition-cards">
+              {recognitionCards.map((item) => (
+                <article className="recognition-card" key={item.title}>
+                  <h3>{item.title}</h3>
+                  <p>{item.body}</p>
+                  <a href={item.href} target="_blank" rel="noreferrer">
+                    View certificate
+                  </a>
+                </article>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        <section className="studio-section studio-contact" id="contact">
+          <div className="studio-section__header">
+            <p className="studio-section__eyebrow">Contact</p>
+            <h2>Let’s build the next version.</h2>
+            <p>
+              Keep the same career data, but present it with a cleaner and more premium visual system.
+            </p>
+          </div>
+
+          <div className="contact-grid">
+            <article className="contact-card">
+              <span>WhatsApp</span>
+              <strong>6384248520</strong>
+              <p>Response within 24 hours</p>
+            </article>
+            <article className="contact-card contact-card--link" onClick={() => window.open("https://www.linkedin.com/in/dhanush-s-679674337/", "_blank")} role="button" tabIndex={0}>
+              <span>LinkedIn</span>
+              <strong>linkedin.com/in/dhanush-s-679674337</strong>
+              <p>Professional connection</p>
+            </article>
+            <article className="contact-card">
+              <span>GitHub</span>
+              <strong>github.com/dhanush1009</strong>
+              <p>Browse recent builds</p>
+            </article>
+          </div>
+
+          <div className="contact-cta">
+            <button className="studio-button studio-button--primary" onClick={() => scrollInto("home")}>Back to top</button>
+            <button className="studio-button studio-button--ghost" onClick={() => scrollInto("work")}>Review work again</button>
+          </div>
+        </section>
+      </main>
+
+      <footer className="studio-footer">
+        <p>Dhanush Studio · React portfolio rebuilt with a darker editorial layout.</p>
+        <div className="studio-footer__links">
+          <button onClick={() => scrollInto("work")}>Projects</button>
+          <button onClick={() => scrollInto("craft")}>Experience</button>
+          <button onClick={() => scrollInto("contact")}>Contact</button>
+        </div>
+      </footer>
+    </div>
+  );
+}
