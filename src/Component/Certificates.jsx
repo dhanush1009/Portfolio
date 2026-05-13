@@ -1,6 +1,7 @@
 import React from "react";
 import mongoCertificate from "../assets/mongodb.pdf";
 import oracleCertificate from "../assets/OracleCertificate.pdf";
+import javaFoundation from "../assets/Java.pdf";
 
 export default function Certificates() {
   return (
@@ -33,7 +34,9 @@ export default function Certificates() {
             <h3>Javafoundation</h3>
           </div>
           <p className="certificate-desc">Global Certificate proves that a person has basic knowledge of Java programming and core concepts used in software development.</p>
-          <a href="#" className="certificate-link">View Certificate <i className="fas fa-external-link-alt"></i></a>
+          <a href={javaFoundation} target="_blank" rel="noreferrer" className="certificate-link">
+            View Certificate <i className="fas fa-external-link-alt"></i>
+          </a>
         </div>
       </div>
     </section>
