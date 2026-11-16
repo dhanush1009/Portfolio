@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { motion, useScroll, useTransform } from 'framer-motion';
+import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
 import { useLenis } from './hooks/useLenis';
 import IntroScreen from './IntroScreen';
@@ -21,37 +21,40 @@ const navigation = [
   { id: 'contact', label: 'Contact' },
 ];
 
-const skills = ['React', 'JavaScript', 'Node.js', 'MongoDB', 'PostgreSQL', 'Python', 'Figma', 'UI/UX', 'Tailwind CSS', 'Express', 'GSAP', 'Framer Motion'];
+const skills = ['React', 'JavaScript', 'Node.js', 'MongoDB', 'PostgreSQL', 'Python', 'Figma', 'UI/UX', 'SEO', 'Meta Ads', 'Tailwind CSS', 'GSAP', 'Framer Motion'];
 
 const projects = [
-  { number: '01', title: 'Disaster Management System', tech: 'React / Node / MongoDB', description: 'A response-focused platform designed to predict, prepare, and recover from disasters with practical workflows and a clear information hierarchy.', tags: ['Weather API', 'Dashboard', 'Real-time'] },
-  { number: '02', title: 'Customer Billing Application', tech: 'React / JavaScript / CSS', description: 'A clean billing interface that emphasizes clarity, speed, and smooth customer-facing interactions.', tags: ['Billing', 'UI Design', 'Responsive'] },
-  { number: '03', title: 'Retail Demand Forecasting', tech: 'React / Python / PostgreSQL', description: 'A forecasting workflow built to support inventory planning and smarter stock decisions through structured product prediction.', tags: ['ML', 'Forecasting', 'Analytics'] },
-  { number: '04', title: 'KEC Student Portal', tech: 'UI/UX / Figma', description: 'A student portal concept with fees, results, community access, and LinkedIn-style connection points for campus networking.', tags: ['Design', 'Portal', 'UX'] },
-  { number: '05', title: 'Go Naturo', tech: 'React / UI Design', description: 'A polished natural products experience centered on calm browsing, readability, and product storytelling.', tags: ['Ecommerce', 'Design', 'Product'] },
-  { number: '06', title: 'Shanruck Technologies', tech: 'React / Node / Systems', description: 'A business-facing web build shaped around responsive UI, modular components, and a professional interface layer.', tags: ['Corporate', 'Responsive', 'Systems'] },
+  { number: '01', label: 'Company portal / Befhue', title: 'Befhue Private Limited Portal', tech: 'React / Node.js / Dashboard UI', description: 'A company-facing portal for Befhue Private Limited that brings essential information and workflows into one structured, responsive interface.', tags: ['Portal', 'Dashboard', 'Systems'], tone: 'mint', image: '/project-images/befhue.png', url: 'https://befhue-portal1.vercel.app/login' },
+  { number: '02', label: 'Business website', title: 'Shanruck Technologies', tech: 'React / Node / Systems', description: 'A business-facing web build shaped around responsive UI, modular components, and a professional interface layer.', tags: ['Corporate', 'Responsive', 'Systems'], tone: 'mint', image: '/project-images/shanruck.png', url: 'https://shanrucktechnologies.in/' },
+  { number: '03', label: 'Product experience', title: 'Go Naturo', tech: 'React / UI Design', description: 'A polished natural products experience centered on calm browsing, readability, and product storytelling.', tags: ['Ecommerce', 'Design', 'Product'], tone: 'coral', image: '/project-images/gonaturo.png', url: 'https://gonature-store-tn-2026.web.app/' },
+  { number: '04', label: 'Client portfolio / Gokul', title: 'Gokul Portfolio', tech: 'React / UI Design / Motion', description: 'A polished personal portfolio built to turn Gokul’s story, services, and work into a memorable digital experience.', tags: ['Brand Story', 'Responsive', 'Motion'], tone: 'violet', image: '/project-images/gokul-portfolio.png', url: 'https://gokul-portfolio-sage.vercel.app/' },
+  { number: '05', label: 'Client portfolio / Karunyan', title: 'Karunyan Portfolio', tech: 'React / Figma / Framer Motion', description: 'A visual-first portfolio for Karunyan, balancing expressive layouts with a clear path from introduction to enquiry.', tags: ['Art Direction', 'UX', 'Interactions'], tone: 'coral', image: '/project-images/karunyan-portfolio.png', url: 'https://karunyan.vercel.app/' },
+  { number: '06', label: 'Portal concept', title: 'KEC Student Portal', tech: 'UI/UX / Figma', description: 'A student portal concept with fees, results, community access, and LinkedIn-style connection points for campus networking.', tags: ['Design', 'Portal', 'UX'], tone: 'violet', image: '/project-images/kec.png', url: 'https://www.figma.com/design/jz1EEmJRWVajwu8GQvTm4p/HACKATHON?node-id=69-2&p=f&t=uVzXPkn6hsJ39lHL-0' },
+  { number: '07', label: 'Academic project', title: 'Disaster Management System', tech: 'React / Node / MongoDB', description: 'A response-focused platform designed to predict, prepare, and recover from disasters with practical workflows and a clear information hierarchy.', tags: ['Weather API', 'Dashboard', 'Real-time'], tone: 'violet', image: 'https://images.unsplash.com/photo-1504711434969-e33886168f5c?auto=format&fit=crop&w=1200&q=85' },
 ];
 
 const capabilities = [
   { title: 'Frontend Development', items: ['React', 'JavaScript', 'HTML/CSS', 'Tailwind CSS', 'Framer Motion', 'GSAP'] },
+  { title: 'Digital Marketing', items: ['SEO', 'Keyword Research', 'On-page SEO', 'Meta Ads', 'Content Strategy', 'Analytics'] },
   { title: 'Backend Development', items: ['Node.js', 'Express', 'MongoDB', 'PostgreSQL', 'REST APIs'] },
   { title: 'Design & UX', items: ['Figma', 'Illustrator', 'Photoshop', 'Wireframing', 'UI Design', 'Animation'] },
   { title: 'Languages', items: ['JavaScript', 'Python', 'Java', 'C', 'SQL'] },
 ];
 
 const aboutStats = [
-  { value: '6+', label: 'Projects Delivered' },
-  { value: '6mo', label: 'Industry Internship' },
+  { value: '7+', label: 'Projects Delivered' },
+  { value: '9mo', label: 'Industry Internship' },
   { value: '3', label: 'Certifications' },
   { value: '10+', label: 'Events & Hackathons' },
 ];
 
-const allSkills = ['React', 'Node.js', 'JavaScript', 'Python', 'Figma', 'MongoDB', 'PostgreSQL', 'Framer Motion', 'GSAP', 'UI/UX', 'Tailwind CSS', 'Express', 'REST APIs', 'Java', 'C', 'HTML/CSS'];
+const allSkills = ['React', 'Node.js', 'JavaScript', 'Python', 'Figma', 'MongoDB', 'PostgreSQL', 'Framer Motion', 'GSAP', 'UI/UX', 'SEO', 'Meta Ads', 'Tailwind CSS', 'Express', 'REST APIs', 'Java', 'C', 'HTML/CSS'];
 
 const experiences = [
-  { number: '01', subtitle: 'Internship', title: 'Full Stack Developer', description: 'Worked on production-adjacent features, improved responsive UI flows, and contributed to the polish of real product screens during a 6-month internship.', tags: ['React', 'Node.js', 'UI', 'Production'] },
-  { number: '02', subtitle: 'Events & Competitions', title: 'Hackathons & Symposiums', description: 'Participated in hackathons, coding events, and symposium presentations that strengthened speed, problem solving, and product communication.', tags: ['HackGENIX', 'AlgoArena', 'TECHNO SUMMIT'] },
-  { number: '03', subtitle: 'Design Thinking', title: 'UI/UX Design Systems', description: 'Figma-led thinking shows up in the way the portfolio, student portal, and product concepts are framed: with hierarchy first and decorative elements second.', tags: ['Figma', 'Design Systems', 'UX'] },
+  { number: '01', subtitle: 'Digital Marketing Internship · 9 months', title: 'SEO & Growth Marketing', description: 'Built practical experience with SEO research, on-page optimization, content structure, keyword discovery, Meta Ads, and the fundamentals of improving organic visibility.', tags: ['SEO', 'Meta Ads', 'Keywords', 'Analytics'] },
+  { number: '02', subtitle: 'Full Stack Internship', title: 'Full Stack Developer', description: 'Worked on production-adjacent features, improved responsive UI flows, and contributed to the polish of real product screens during a 9-month internship.', tags: ['React', 'Node.js', 'UI', 'Production'] },
+  { number: '03', subtitle: 'Events & Competitions', title: 'Hackathons & Symposiums', description: 'Participated in hackathons, coding events, and symposium presentations that strengthened speed, problem solving, and product communication.', tags: ['HackGENIX', 'AlgoArena', 'TECHNO SUMMIT'] },
+  { number: '04', subtitle: 'Design Thinking', title: 'UI/UX Design Systems', description: 'Figma-led thinking shows up in the way every build is framed: with hierarchy first and decorative elements second.', tags: ['Figma', 'Design Systems', 'UX'] },
 ];
 
 const recognitions = [
@@ -129,9 +132,12 @@ function HeroSection() {
         <div>
           <motion.p variants={item} className="hero-tag">Digital Experience Portfolio</motion.p>
           <motion.h1 variants={item} className="hero-title">
-            Creative <br/>
-            <i style={{ color: "var(--accent)", fontStyle: "italic", fontWeight: "300" }}>Developer</i> & <br/>
-            Designer
+            <span className="hover-word">Creative</span>{' '}
+            <br/>
+            <i style={{ color: "var(--accent)", fontStyle: "italic", fontWeight: "300" }}>
+              <span className="hover-word" style={{'--stroke-color': 'var(--accent)'}}>Developer</span>
+            </i>{' '}&{' '}<br/>
+            <span className="hover-word">Designer</span>
           </motion.h1>
           <motion.p variants={item} className="hero-subtitle">Crafting immersive digital experiences through precision code and minimalist design. Based in the intersection of logic and art.</motion.p>
         </div>
@@ -140,9 +146,9 @@ function HeroSection() {
           <button className="btn btn-secondary" onClick={() => { const link = document.createElement('a'); link.href = resume; link.download = 'Dhanush_Resume.pdf'; document.body.appendChild(link); link.click(); document.body.removeChild(link); }}>Download Resume</button>
         </motion.div>
         <motion.div variants={item} className="hero-stats">
-          <div className="stat-card"><span className="stat-value">6</span><span className="stat-label">Projects</span></div>
+          <div className="stat-card"><span className="stat-value">7</span><span className="stat-label">Projects</span></div>
           <div className="stat-card"><span className="stat-value">3</span><span className="stat-label">Certifications</span></div>
-          <div className="stat-card"><span className="stat-value">6 mo</span><span className="stat-label">Internship</span></div>
+          <div className="stat-card"><span className="stat-value">9 mo</span><span className="stat-label">Internship</span></div>
         </motion.div>
       </motion.div>
       <motion.div className="hero-visual" initial={{ opacity: 0, filter: "blur(20px)" }} animate={inView ? { opacity: 1, filter: "blur(0px)" } : {}} transition={{ duration: 1.2, delay: 0.5, ease: "easeOut" }}>
@@ -166,19 +172,10 @@ function SkillsMarquee() {
 }
 
 function ProjectsSection() {
-  const targetRef = React.useRef(null);
-  const { scrollYProgress } = useScroll({
-    target: targetRef,
-  });
-
-  // Calculate the horizontal scroll amount. 
-  // With 6 projects, we scroll left enough to see all of them.
-  // We will map 0 -> 1 scroll progress to 0% -> -80% horizontal translation.
-  // (Adjust the end percentage based on card width and gap)
-  const x = useTransform(scrollYProgress, [0, 1], ["0%", "-75%"]);
+  const [selectedProject, setSelectedProject] = React.useState(null);
 
   return (
-    <section className="projects-section" id="work" ref={targetRef}>
+    <section className="projects-section" id="work">
       <div className="projects-sticky-wrapper">
         <div className="container projects-header-container">
           <div className="section-header">
@@ -187,16 +184,56 @@ function ProjectsSection() {
             <p className="section-description">A collection of projects showcasing expertise in frontend design, full-stack development, and creative problem-solving.</p>
           </div>
         </div>
-        <motion.div style={{ x }} className="projects-horizontal-track">
+        <motion.div className="projects-horizontal-track projects-bento-grid">
           {projects.map((project, index) => (
-            <motion.div key={project.number} className="project-card horizontal-card" whileHover={{ y: -8 }}>
-              <div className="project-header"><span className="project-number">{project.number}</span><span className="project-tech">{project.tech}</span></div>
+            <motion.div key={project.number} className={`project-card horizontal-card project-${project.tone} project-card--${project.number}`} initial={{ opacity: 0, y: 45 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.65, delay: index * 0.08, ease: [0.22, 1, 0.36, 1] }} viewport={{ once: true, amount: 0.15 }} whileHover={{ y: -8, rotate: index % 2 === 0 ? -1 : 1 }}>
+              <div className="project-visual">
+                <img src={project.image} alt={`${project.title} preview`} className="project-visual-image" loading="lazy" decoding="async" />
+              </div>
+              <div className="project-header">
+                <span className="project-number">{project.number} / {project.label}</span>
+                <span className="project-tech">{project.tech}</span>
+              </div>
               <h3 className="project-title">{project.title}</h3>
               <p className="project-description">{project.description}</p>
               <div className="project-tags">{project.tags.map((tag) => (<span key={tag} className="project-tag">{tag}</span>))}</div>
+              <div className="project-card-footer">
+                {project.url ? (
+                  <a className="view-project-button" href={project.url} target="_blank" rel="noreferrer">
+                    View Project <span aria-hidden="true">↗</span>
+                  </a>
+                ) : (
+                  <button className="view-project-button" type="button" onClick={() => setSelectedProject(project)}>
+                    View Project <span aria-hidden="true">↗</span>
+                  </button>
+                )}
+              </div>
             </motion.div>
           ))}
         </motion.div>
+        {selectedProject && (
+          <div className="project-modal-backdrop" role="presentation" onClick={() => setSelectedProject(null)}>
+            <motion.div
+              className="project-modal"
+              role="dialog"
+              aria-modal="true"
+              aria-labelledby="project-modal-title"
+              initial={{ opacity: 0, y: 24, scale: 0.96 }}
+              animate={{ opacity: 1, y: 0, scale: 1 }}
+              onClick={(event) => event.stopPropagation()}
+            >
+              <button className="project-modal-close" type="button" aria-label="Close project details" onClick={() => setSelectedProject(null)}>×</button>
+              <span className="section-tag">{selectedProject.label}</span>
+              <h3 id="project-modal-title">{selectedProject.title}</h3>
+              <p>{selectedProject.description}</p>
+              <div className="project-modal-meta">
+                <span>{selectedProject.tech}</span>
+                <div className="project-tags">{selectedProject.tags.map((tag) => <span key={tag} className="project-tag">{tag}</span>)}</div>
+              </div>
+              <button className="btn btn-primary" type="button" onClick={() => { setSelectedProject(null); scrollToSection('contact'); }}>Discuss this project</button>
+            </motion.div>
+          </div>
+        )}
       </div>
     </section>
   );
@@ -232,9 +269,14 @@ function AboutSection() {
             transition={{ duration: 1, ease: [0.76, 0, 0.24, 1] }}
             viewport={{ once: true }}
           >
-            I turn ideas into
-            <br /><i>living, breathing</i>
-            <br />digital products.
+            <span className="hover-word">I</span>{' '}
+            <span className="hover-word">turn</span>{' '}
+            <span className="hover-word">ideas</span>{' '}
+            <span className="hover-word">into</span>
+            <br />
+            <i><span className="hover-word" style={{'--stroke-color': 'var(--accent)'}}>living,</span>{' '}<span className="hover-word" style={{'--stroke-color': 'var(--accent)'}}>breathing</span></i>
+            <br />
+            <span className="hover-word">digital</span>{' '}<span className="hover-word">products.</span>
           </motion.h2>
 
           {/* Stat pills */}
@@ -339,7 +381,7 @@ function ExperienceSection() {
         transition={{ duration: 0.8, ease: [0.76, 0, 0.24, 1] }}
         viewport={{ once: true }}
       >
-        Professional <i>Journey</i>
+        Professional <i><span className="hover-word" style={{'--stroke-color': 'var(--accent)'}}>Journey</span></i>
       </motion.h2>
       <div className="experience-list-full">
         {experiences.map((exp, index) => (
@@ -356,6 +398,7 @@ function ExperienceSection() {
             <div className="exp-row-content">
               <span className="exp-row-subtitle">{exp.subtitle}</span>
               <h3 className="exp-row-title">{exp.title}</h3>
+              <p className="exp-row-description">{exp.description}</p>
             </div>
             <div className="exp-row-tags">
               {exp.tags.map((tag) => (
@@ -389,7 +432,7 @@ function RecognitionSection() {
         transition={{ duration: 0.8, ease: [0.76, 0, 0.24, 1] }}
         viewport={{ once: true }}
       >
-        Certifications & <i>Credentials</i>
+        <span className="hover-word">Certifications</span> & <i><span className="hover-word" style={{'--stroke-color': 'var(--accent)'}}>Credentials</span></i>
       </motion.h2>
       <div className="recognition-list">
         {recognitions.map((recognition, index) => (
@@ -433,9 +476,9 @@ function ContactSection() {
         transition={{ duration: 1, ease: [0.76, 0, 0.24, 1] }}
         viewport={{ once: true }}
       >
-        Let's Create<br />
-        <i>Something</i><br />
-        Amazing.
+        <span className="hover-word">Let's</span>{' '}<span className="hover-word">Create</span><br />
+        <i><span className="hover-word" style={{'--stroke-color': 'var(--accent)'}}>Something</span></i><br />
+        <span className="hover-word">Amazing.</span>
       </motion.h2>
       <div className="contact-grid">
         <motion.div className="contact-card" initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }} viewport={{ once: true }} whileHover={{ y: -4 }}>

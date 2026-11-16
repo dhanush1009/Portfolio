@@ -6,7 +6,7 @@ export default function Cursor() {
     x: 0,
     y: 0
   });
-  const [isHovering, setIsHovering] = useState(false);
+  const [hoverTarget, setHoverTarget] = useState('default');
 
   useEffect(() => {
     const mouseMove = e => {
@@ -27,17 +27,17 @@ export default function Cursor() {
     const handleMouseOver = (e) => {
       const target = e.target;
       // Check if hovering over interactive elements
-      if (
+      if (target.closest('.project-card')) {
+        setHoverTarget('project');
+      } else if (
         target.tagName.toLowerCase() === 'a' ||
         target.tagName.toLowerCase() === 'button' ||
         target.closest('a') ||
-        target.closest('button') ||
-        target.classList.contains('project-card') ||
-        target.closest('.project-card')
+        target.closest('button')
       ) {
-        setIsHovering(true);
+        setHoverTarget('interactive');
       } else {
-        setIsHovering(false);
+        setHoverTarget('default');
       }
     };
 
@@ -54,15 +54,27 @@ export default function Cursor() {
       y: mousePosition.y - 16,
       scale: 1,
       backgroundColor: "transparent",
-      border: "1px solid var(--text-muted)"
+      border: "1px solid var(--text-muted)",
+      borderRadius: "50%"
     },
-    hover: {
+    interactive: {
       x: mousePosition.x - 16,
       y: mousePosition.y - 16,
       scale: 1.5,
+      backgroundColor: "transparent",
+      border: "1px solid var(--accent)",
+      mixBlendMode: "normal",
+      borderRadius: "50%"
+    },
+    project: {
+      x: mousePosition.x - 28,
+      y: mousePosition.y - 28,
+      scale: 1,
       backgroundColor: "var(--accent)",
-      border: "1px solid transparent",
-      mixBlendMode: "difference"
+      border: "1px solid var(--accent)",
+      mixBlendMode: "normal",
+      borderRadius: "8px",
+      rotate: 45
     }
   };
 
@@ -72,10 +84,15 @@ export default function Cursor() {
       y: mousePosition.y - 4,
       backgroundColor: "var(--accent)"
     },
-    hover: {
+    interactive: {
       x: mousePosition.x - 4,
       y: mousePosition.y - 4,
-      backgroundColor: "transparent"
+      backgroundColor: "var(--text)"
+    },
+    project: {
+      x: mousePosition.x - 4,
+      y: mousePosition.y - 4,
+      backgroundColor: "var(--bg)"
     }
   };
 
@@ -84,13 +101,13 @@ export default function Cursor() {
       <motion.div
         className="custom-cursor-ring"
         variants={variants}
-        animate={isHovering ? "hover" : "default"}
+        animate={hoverTarget}
         transition={{ type: "tween", ease: "backOut", duration: 0.15 }}
       />
       <motion.div
         className="custom-cursor-dot"
         variants={dotVariants}
-        animate={isHovering ? "hover" : "default"}
+        animate={hoverTarget}
         transition={{ type: "tween", ease: "linear", duration: 0 }}
       />
     </>
